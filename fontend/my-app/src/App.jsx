@@ -25,7 +25,7 @@ function App() {
   return (
 
     
-    <>
+    <div className='all-1'>
     
     {
       user.map(sUser => <h1 key={sUser.id}>{sUser.name}</h1>)
@@ -40,7 +40,7 @@ function App() {
 
     </form>
 
-    </>
+    </div>
      
     
       
