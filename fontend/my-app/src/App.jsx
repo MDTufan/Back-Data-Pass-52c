@@ -19,7 +19,25 @@ function App() {
     
     const name=form.name.value;
     const email=form.email.value;
-    console.log(name,email);
+    const alluser={name,email};
+   
+
+    fetch('http://localhost:3000/user',{
+      method:"POST",
+      headers:{'content-type':"application/json"},
+      body:JSON.stringify(alluser)
+    })
+    .then(res => res.json())
+    .then(data => {
+      // const newuser=[...user,data]
+      // setUser(newuser)
+      console.log(data)
+      if(data.acknowledged){
+        alert("Users Added SuccessFully.")
+      }
+    })
+
+    form.reset();
   }
   
   return (
@@ -28,15 +46,18 @@ function App() {
     <div className='all-1'>
     
     {
-      user.map(sUser => <h1 key={sUser.id}>{sUser.name}</h1>)
+      user.map(sUser => <li key={sUser.name}>{sUser.name}</li>)
     }
 
     <form action=""  onSubmit={handelsubmit}>
-    <input type="text" name="name" id="" />
+      Name: <br />
+    <input type="text" name="name" id="" placeholder='Enter Your Name' />
     <br />
-    <input type="email" name="email" id="" />
+    Email:<br />
+    <input type="email" name="email" id=""  placeholder='Enter Your Email'/>
     <br />
-    <button type='submit'>Click</button>
+    <br />
+    <button type='submit'>Add User</button>
 
     </form>
 
